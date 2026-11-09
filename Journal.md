@@ -29,3 +29,19 @@ Adding an item to a PriorityQueue takes O(log N) time. Sorting an entire list ta
 Challenges:
 
 One thing I had to understand was how to remove two companies, calculate their combined size with 10% synergy, and then add the new company back into the queue. The while loop allows this process to repeat automatically.
+
+-----------------
+
+Phase 3: The Titan Threshold
+
+What would happen to your code if you forgot to check the queue size before calling poll() twice?
+
+If I forgot to check the queue size, the program could try to remove a company when there aren't enough companies left. The poll() method would return null if the queue was empty. This could cause a NullPointerException when trying to access the company's name or size.
+
+How does this relate to Underflow?
+
+Underflow happens when a program tries to remove an item from a data structure that does not have enough elements. Checking the queue size before removing two companies prevents this problem.
+
+Challenges:
+
+One challenge was figuring out how to stop the merger loop when a company reaches 500,000 units. I used a merger counter and a titan variable to keep track of the simulation and determine when it should stop.
