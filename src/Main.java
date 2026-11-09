@@ -19,20 +19,37 @@ public class Main {
         market.add(new Company("Oscorp", 22000));
         market.add(new Company("Aperture Science", 5000));
 
-        // Display all companies
         System.out.println("=== CORPORATE MERGER SIMULATOR ===");
-        System.out.println("Companies in the market: " + market.size());
+        System.out.println("Starting companies: " + market.size());
 
-        // Remove and display the smallest company
-        Company smallest = market.poll();
+        // Continue merging while companies remain
+        while (market.size() >= 2) {
 
-        System.out.println("\nSmallest company in the market:");
-        System.out.println(smallest);
+            // Remove the two smallest companies
+            Company companyA = market.poll();
+            Company companyB = market.poll();
 
-        // Add the company back
-        market.add(smallest);
+            // Calculate the new size with 10% synergy
+            int newSize = (int) ((companyA.getSize()
+                    + companyB.getSize()) * 1.1);
 
-        System.out.println("\nCompany returned to the market.");
-        System.out.println("Companies remaining: " + market.size());
+            // Combine the company names
+            String newName = companyA.getName()
+                    + "-" + companyB.getName();
+
+            // Create the new merged company
+            Company mergedCompany = new Company(newName, newSize);
+
+            // Display merger information
+            System.out.println("\nMERGER: " + companyA.getName()
+                    + " and " + companyB.getName()
+                    + " have merged into " + newName
+                    + " with size " + newSize + "!");
+
+            // Add the new company back into the market
+            market.add(mergedCompany);
+        }
+
+        System.out.println("\n=== MERGER SIMULATION COMPLETE ===");
     }
 }
