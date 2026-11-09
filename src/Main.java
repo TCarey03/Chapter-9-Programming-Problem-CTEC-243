@@ -19,10 +19,10 @@ public class Main {
         market.add(new Company("Oscorp", 22000));
         market.add(new Company("Aperture Science", 5000));
 
-        // Titan size requirement
+        // Set the Industry Titan threshold
         final int TITAN_THRESHOLD = 500000;
 
-        // Count the total mergers
+        // Track the number of mergers
         int mergerCount = 0;
 
         // Store the Industry Titan
@@ -31,8 +31,16 @@ public class Main {
         System.out.println("=== CORPORATE MERGER SIMULATOR ===");
         System.out.println("Starting companies: " + market.size());
 
-        // Continue while at least two companies remain
-        // and no titan has emerged
+        // Check if any starting company is already a Titan
+        for (Company company : market) {
+            if (company.getSize() >= TITAN_THRESHOLD) {
+                titan = company;
+                break;
+            }
+        }
+
+        // Start merging while at least two companies remain
+        // and no Titan has emerged
         while (market.size() >= 2 && titan == null) {
 
             // Remove the two smallest companies
@@ -43,14 +51,14 @@ public class Main {
             int newSize = (int) ((companyA.getSize()
                     + companyB.getSize()) * 1.1);
 
-            // Combine company names
+            // Combine the company names
             String newName = companyA.getName()
                     + "-" + companyB.getName();
 
             // Create the merged company
             Company mergedCompany = new Company(newName, newSize);
 
-            // Count this merger
+            // Increase the merger counter
             mergerCount++;
 
             // Print merger report
@@ -59,17 +67,18 @@ public class Main {
                     + " have merged into " + newName
                     + " with size " + newSize + "!");
 
-            // Check if the new company is an Industry Titan
+            // Check if the new company becomes a Titan
             if (newSize >= TITAN_THRESHOLD) {
                 titan = mergedCompany;
+
                 System.out.println("\n*** INDUSTRY TITAN HAS EMERGED! ***");
             } else {
-                // Add the company back into the market
+                // Add the merged company back into the market
                 market.add(mergedCompany);
             }
         }
 
-        // Final report
+        // Display final report
         System.out.println("\n=== FINAL MARKET REPORT ===");
 
         if (titan != null) {
@@ -80,6 +89,7 @@ public class Main {
 
         System.out.println("Total mergers: " + mergerCount);
 
+        // Display the last remaining company if applicable
         if (titan == null && market.size() == 1) {
             System.out.println("Last remaining company: " + market.peek());
         }
