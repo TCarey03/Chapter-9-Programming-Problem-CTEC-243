@@ -45,3 +45,21 @@ Underflow happens when a program tries to remove an item from a data structure t
 Challenges:
 
 One challenge was figuring out how to stop the merger loop when a company reaches 500,000 units. I used a merger counter and a titan variable to keep track of the simulation and determine when it should stop.
+
+-----------------
+
+Phase 4: Validation & Reflection
+
+What bugs or unexpected behaviors did you catch while testing your program?
+
+While testing my program, I noticed that companies that were already larger than 500,000 could be overlooked because my program originally checked for a Titan only after a merger. I fixed this by checking the starting companies before the merger loop.
+
+I also tested the program with very small company sizes. The companies continued merging until only one company remained, and no Industry Titan emerged.
+
+If you asked an AI tutor for feedback, what did it suggest, and did you choose to make any changes?
+
+I asked an AI tutor to review my code for errors and possible edge cases. It suggested checking whether any starting company already meets the Titan threshold before beginning the merger process. I decided to make this improvement because it helps my program handle larger starting companies correctly.
+
+What did I learn?
+
+I learned how a PriorityQueue can organize objects based on their size and how to use poll() and add() to manage the companies. I also learned how to use loops, conditional statements, and counters to control a simulation.
